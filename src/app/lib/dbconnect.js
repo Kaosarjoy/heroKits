@@ -3,6 +3,10 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 const uri = process.env.URI;
 const dbname = process.env.DB_NAME;
 
+export const collections={
+  PRODUCTS:"products",
+  USERS:"users",
+}
 let client;
 let clientPromise;
 

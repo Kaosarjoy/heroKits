@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/layouts/navbar";
 import Footer from "@/components/layouts/Footer";
 import localFont from "next/font/local";
+import NextAuthProvider from "@/provider/NextAuthProvider";
 
 // Bangla font
 export const fontBangla = localFont({
@@ -86,7 +87,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <NextAuthProvider>
+      <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         
         {/* Navbar */}
@@ -106,6 +108,7 @@ export default function RootLayout({ children }) {
 
       </body>
     </html>
+    </NextAuthProvider>
   );
 
 }
