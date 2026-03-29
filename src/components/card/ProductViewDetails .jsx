@@ -1,7 +1,65 @@
 "use client";
 
+import { getSingleProduct } from "@/action/server/Product";
 import Image from "next/image";
 import { FaStar, FaCartShopping } from "react-icons/fa6";
+import CartButton from "../buttons/CartButton";
+
+export async function generateMetadata({ params }) {
+  const { id } = params;
+
+  const product = await getSingleProduct(id);
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Hero Kids",
+      description: "This product does not exist",
+    };
+  }
+
+  return {
+    title: `${product.name} | Hero Kids`,
+
+    description:
+      product.description?.slice(0, 150) ||
+      "Buy high quality toys for kids at Hero Kids.",
+
+    keywords: [
+      product.name,
+      "kids toys",
+      "buy toys online",
+      "Hero Kids",
+    ],
+
+    openGraph: {
+      title: product.name,
+      description: product.description,
+      url: `https://hero-kids-orpin.vercel.app/products/${id}`,
+      siteName: "Hero Kids",
+      images: [
+        {
+          url: product.image,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.description,
+      images: [product.image],
+    },
+
+    alternates: {
+      canonical: `https://hero-kids-orpin.vercel.app/products/${id}`,
+    },
+  };
+}
+
 
 const ProductViewDetails = ({ product }) => {
   if (!product) return <p>Product not found</p>;
@@ -31,7 +89,7 @@ const ProductViewDetails = ({ product }) => {
           alt={title}
           width={400}
           height={400}
-          className="rounded-xl object-cover w-full h-[400px]"
+          className="rounded-xl object-cover w-full "
         />
       </div>
 
@@ -73,12 +131,9 @@ const ProductViewDetails = ({ product }) => {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 mt-4">
-          <button className="btn btn-primary flex-1 flex items-center justify-center gap-2">
-            <FaCartShopping />
-            Add to Cart
-          </button>
-          <button className="btn btn-outline flex-1">Buy Now</button>
+        <div className="flex gap-4 mt-4 ">
+          <CartButton ></CartButton>
+          <button className="btn  btn-outline flex-1">Buy Now</button>
         </div>
 
       </div>

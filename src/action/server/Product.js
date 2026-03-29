@@ -22,7 +22,7 @@ export const getSingleProduct = async ({ id }) => {
 
   return {
     ...product,
-    _id: product._id.toString(), // 🔥 convert
+    _id: product._id.toString(), //  convert
   };
 };
 
