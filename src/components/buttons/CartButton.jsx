@@ -1,15 +1,22 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 
 const CartButton = ({ product }) => {
-  const login = false;
+  const {data : session} = useSession();
   const router = useRouter();
   const path = usePathname();
   const isLogin = () => {
-    if (login) alert(product._id);
-    else router.push(`/login?callbackUrl=${path}`);
+    //check the user is login or not 
+    if(session?.user){
+      return alert("Product ID: "+ product?._id);
+      // ekhane apnar cart e add korar logic likhben
+    }else{
+      // login na thakle login page e pathabe
+      router.push(`/login?callbackUrl=${path}`);
+    }
   };
 
   return (
@@ -21,3 +28,5 @@ const CartButton = ({ product }) => {
 };
 
 export default CartButton;
+
+

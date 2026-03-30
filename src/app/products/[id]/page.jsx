@@ -1,5 +1,5 @@
 import { getSingleProduct } from '@/action/server/Product';
-import ProductViewDetails from '@/components/card/ProductViewDetails ';
+import ProductViewDetails from '@/components/card/ProductViewDetails';
 
 
 const ProductPage = async ({ params }) => {
@@ -22,4 +22,5 @@ const ProductPage = async ({ params }) => {
   return <ProductViewDetails product={product} />;
 };
 
-export default ProductPage;//
+export default ProductPage;
+

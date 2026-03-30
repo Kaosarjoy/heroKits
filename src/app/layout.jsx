@@ -97,7 +97,7 @@ export default function RootLayout({ children }) {
         </header>
 
         {/* Main Content */}
-        <main className="py-2 md:w-11/12 mx-auto min-h-[calc(100vh-302px)]">
+        <main className="py-2 md:w-11/12 mx-auto min-h-screen">
           {children}
         </main>
 

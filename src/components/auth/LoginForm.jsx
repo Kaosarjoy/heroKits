@@ -5,8 +5,12 @@ import { signIn } from "next-auth/react"
 import Swal from "sweetalert2";
 import error from "@/app/error";
 import { useRouter } from "next/navigation";
+
+
 export const LoginForm = () => {
+
   const router = useRouter();
+  const [loading, setLoading]=useState(false);
   const [form , setForm] = useState({
     email :"",
     password:"",
@@ -21,12 +25,14 @@ export const LoginForm = () => {
 
   const handleSubmit =async(e)=>{
     e.preventDefault();
+    setLoading(true);
       // ekhane form data diye login er jonno api call kora jabe
    const result = await signIn("credentials",{
     email:form.email,
     password:form.password,
    redirect: false
   })
+  setLoading(false);
 // console.log(result);
   if(!result.ok){
     Swal.fire({
@@ -50,7 +56,7 @@ router.push("/")
 
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
 
-        <form className="space-y-4" onClick={handleSubmit}>
+        <form className="space-y-4" onSubmit={handleSubmit}>
           
           <div>
             <label className="block text-sm font-medium">Email</label>
