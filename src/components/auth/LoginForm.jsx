@@ -4,12 +4,15 @@ import React, { useState } from "react";
 import { signIn } from "next-auth/react"
 import Swal from "sweetalert2";
 import error from "@/app/error";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import GoogleButton from "../buttons/GoogleButton";
 
 
 export const LoginForm = () => {
 
-  const router = useRouter();
+ const params = useSearchParams()
+ const callback = params.get("callbackUrl") || "/"
+
   const [loading, setLoading]=useState(false);
   const [form , setForm] = useState({
     email :"",
@@ -30,7 +33,8 @@ export const LoginForm = () => {
    const result = await signIn("credentials",{
     email:form.email,
     password:form.password,
-   redirect: false
+  // redirect: false,
+   callbackUrl:params.get("callbackUrl") || "/"
   })
   setLoading(false);
 // console.log(result);
@@ -47,7 +51,7 @@ export const LoginForm = () => {
   icon: "success",
   draggable: true
 });
-router.push("/")
+
   }
   }
   return (
@@ -92,19 +96,11 @@ router.push("/")
         </div>
 
         {/* Google Button */}
-        <button className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-gray-100">
-          <svg width="16" height="16" viewBox="0 0 512 512">
-            <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"/>
-            <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"/>
-            <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"/>
-            <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"/>
-          </svg>
-          Continue with Google
-        </button>
+        <GoogleButton></GoogleButton>
 
         <p className="text-center mt-4 text-sm">
           Don’t have an account?{" "}
-          <Link href="/register" className="text-blue-500">
+          <Link href={`/register?callbackUrl=${callback}`} className="text-blue-500">
             Register
           </Link>
         </p>

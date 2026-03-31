@@ -1,11 +1,15 @@
 "use client";
 import { postUser } from "@/action/server/auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import GoogleButton from "../buttons/GoogleButton";
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 
  const RegisterForm = () => {
-  const route = useRouter();
+  const parms = useSearchParams();
+  const callbackUrl = parms.get("callbaclUrl") || "/";
+  //const route = useRouter();
   const [form , setForm] = useState({
     name:"",
     email:"",
@@ -23,8 +27,15 @@ import React, { useState } from "react";
     e.preventDefault();
     const result =await postUser(form);
     if(result?.acknowledged){
-      alert("User created successfully");
-      route.push("/login");
+      
+     // route.push("/login");
+     const result = await signIn("credentials",{
+      email:form.email,
+      password:form.password,
+      //redirect: false,
+      callbackUrl:callbackUrl
+     })
+alert("User created successfully");
     }
   }
   return (
@@ -80,15 +91,7 @@ import React, { useState } from "react";
         </div>
 
         {/* Google Button */}
-        <button className="w-full flex items-center justify-center gap-2 border py-2 rounded-lg hover:bg-gray-100">
-          <svg width="16" height="16" viewBox="0 0 512 512">
-            <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"/>
-            <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"/>
-            <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"/>
-            <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"/>
-          </svg>
-          Continue with Google
-        </button>
+        <GoogleButton></GoogleButton>
 
         <p className="text-center text-sm mt-4">
           Already have an account?{" "}

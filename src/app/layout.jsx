@@ -87,30 +87,34 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <NextAuthProvider>
-      <html lang="en">
+    <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        
-        {/* Navbar */}
-        <header className="py-2 md:w-11/12 mx-auto">
-          <Navbar />
-        </header>
+        {/* NextAuthProvider কে বডির ভেতরে নিয়ে আসুন */}
+        <NextAuthProvider>
+          
+          {/* Navbar */}
+          <header className="py-2 md:w-11/12 mx-auto">
+            <Navbar />
+          </header>
 
-        {/* Main Content */}
-        <main className="py-2 md:w-11/12 mx-auto min-h-screen">
-          {children}
-        </main>
+          {/* Main Content */}
+          <main className="py-2 md:w-11/12 mx-auto min-h-screen">
+            {children}
+          </main>
 
-        {/* Footer */}
-        <footer>
-          <Footer />
-        </footer>
+          {/* Footer */}
+          <footer>
+            <Footer />
+          </footer>
 
+        </NextAuthProvider>
       </body>
     </html>
-    </NextAuthProvider>
+    
   );
 
 }
 
-//16 min 
+//5 min
+
+//Note -> 72 no modules 7 no video ti google provider implementation er jonno. 13.4 sec
