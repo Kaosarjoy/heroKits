@@ -3,13 +3,14 @@ import { postUser } from "@/action/server/auth";
 import Link from "next/link";
 import React, { useState } from "react";
 import GoogleButton from "../buttons/GoogleButton";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
 
  const RegisterForm = () => {
   const parms = useSearchParams();
   const callbackUrl = parms.get("callbaclUrl") || "/";
-  //const route = useRouter();
+  const route = useRouter();
   const [form , setForm] = useState({
     name:"",
     email:"",
@@ -32,10 +33,24 @@ import { signIn } from "next-auth/react";
      const result = await signIn("credentials",{
       email:form.email,
       password:form.password,
-      //redirect: false,
+      redirect: false,
       callbackUrl:callbackUrl
      })
-alert("User created successfully");
+      if(result.ok){
+        route.push(callbackUrl);
+        Swal.fire({
+          title: "Registration Successful!",
+          icon: "success",
+          draggable: true
+        });
+      }else{
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! try google login or login with your credentials",
+          footer: `<a href="#">Why do I have this issue? </a>`
+        });
+      }
     }
   }
   return (

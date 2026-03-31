@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
           </main>
 
           {/* Footer */}
-          <footer>
+          <footer className="mt-5">
             <Footer />
           </footer>
 
@@ -115,6 +115,7 @@ export default function RootLayout({ children }) {
 
 }
 
-//5 min
+//https://chatgpt.com/s/t_694546b1897c81918a77b0904c27264c
+//11 min 
 
 //Note -> 72 no modules 7 no video ti google provider implementation er jonno. 13.4 sec

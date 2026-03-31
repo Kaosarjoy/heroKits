@@ -10,6 +10,7 @@ import GoogleButton from "../buttons/GoogleButton";
 
 export const LoginForm = () => {
 
+ const router = useRouter(); 
  const params = useSearchParams()
  const callback = params.get("callbackUrl") || "/"
 
@@ -33,8 +34,8 @@ export const LoginForm = () => {
    const result = await signIn("credentials",{
     email:form.email,
     password:form.password,
-  // redirect: false,
-   callbackUrl:params.get("callbackUrl") || "/"
+   redirect: false,
+   //callbackUrl:params.get("callbackUrl") || "/"
   })
   setLoading(false);
 // console.log(result);
@@ -42,7 +43,7 @@ export const LoginForm = () => {
     Swal.fire({
   icon: "error",
   title: "Oops...",
-  text: "Something went wrong!",
+  text: "Something went wrong! try google login or register",
   footer: `<a href=\"#\">Why do I have this issue? </a>`
 });
   }else{
@@ -51,7 +52,7 @@ export const LoginForm = () => {
   icon: "success",
   draggable: true
 });
-
+  router.push(callback)
   }
   }
   return (
