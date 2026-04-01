@@ -119,3 +119,6 @@ export default function RootLayout({ children }) {
 //11 min 
 
 //Note -> 72 no modules 7 no video ti google provider implementation er jonno. 13.4 sec
+
+//NEXTAUTH_SECRET generate korte hole terminal e nicher command run korte hobe
+//node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"

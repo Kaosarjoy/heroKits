@@ -132,7 +132,7 @@ const ProductViewDetails = ({ product }) => {
 
         {/* Buttons */}
         <div className="flex gap-4 mt-4 ">
-          <CartButton ></CartButton>
+          <CartButton product={product}></CartButton>
           <button className="btn  btn-outline flex-1">Buy Now</button>
         </div>
 
