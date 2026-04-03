@@ -69,8 +69,47 @@ export const deleteCartItem = async(id)=>{
 
     const result = await cartCollection.deleteOne(query);
 
-    if(Boolean(result.deletedCount)){
-        revalidatePath("/cart");
-    }
+    // if(Boolean(result.deletedCount)){
+    //     revalidatePath("/cart");
+    // }
     return {success : Boolean(result.deletedCount)}
 }
+
+export const incrementItems = async(id , quantity)=>{
+
+    const { user } =await getServerSession(authOptions) || {};
+    if(!user)return {success:false}
+
+    if(quantity >= 10){
+    return {success : false, message : "Quantity cannot exceed 10"}
+}
+
+    const query = {_id : new ObjectId(id)};
+    
+     const updateData = {
+            $inc : {
+                quantity :1
+            }
+            }
+
+      const result = await cartCollection.updateOne(query, updateData);
+      return {success : Boolean(result.modifiedCount)}      
+}
+
+
+export const decrementItems = async(id)=>{
+
+    const { user } =await getServerSession(authOptions) || {};
+    if(!user)return {success:false}
+
+    const query = {_id : new ObjectId(id)};
+
+    const updateData = {
+        $inc : {
+            quantity : -1
+        }
+    }
+    const result = await cartCollection.updateOne(query , updateData)
+     return {success : Boolean(result.modifiedCount)}     
+}
+ 

@@ -5,24 +5,57 @@ import React, { useState } from "react";
 import { FaMinus, FaPlus, FaTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item , removeItem , incrementQuantity , decrementQuantity }) => {
    
   const [loading, setLoading] = useState(false);
 
-  // quantity update করার জন্য ফাংশন, inc প্যারামিটার দিয়ে বোঝানো হচ্ছে quantity বাড়ানো হবে না কমানো হবে
-  const handleUpdateQuantity = async (isIncrement) => {
-    setLoading(true);
-    // add to cart function কে quantity update করার জন্য কল করা হচ্ছে, inc প্যারামিটার দিয়ে বোঝানো হচ্ছে quantity বাড়ানো হবে না কমানো হবে
-    const result = await addToCart({ product: { _id: item.productId }, inc: isIncrement });
-    
-    if (result.success) {
-      //auto Refresh or update the cart item quantity in UI
-      setLoading(false);
-    } else {
-      Swal.fire("Error", "Could not update quantity", "error");
-      setLoading(false);
+  
+  //Quantity barano jono 
+  const handleIncrementQuantity = async()=>{
+    const result = await incrementQuantity(item._id, item.quantity);
+    if(result.success){
+      Swal.fire({
+        title: "Success!",
+  icon: "success",
+  draggable: true
+      })
     }
+    else{
+      Swal.fire({
+        title: "Error!",
+  text: "Failed to update quantity. Please try again.",
+    icon: "error"
+      })
+    }
+  }
+
+
+
+  //Quantity Komanor  jono 
+  const handleRemoveQuantity = async () => {
+    setLoading(true);
+    const result = await decrementQuantity(item._id, item.quantity);
+    
+    if(result.success){
+      Swal.fire({
+        title: "Success!",
+     icon: "success",
+    draggable: true
+      })
+    }
+    else{
+      Swal.fire({
+        title: "Error!",
+  text: "Failed to update quantity. Please try again.",
+    }
+      )
+    }
+
+     setLoading(false);
+
   };
+
+
   //Remove cart item
   const handleRemoveCart = async()=>{
    Swal.fire({
@@ -36,7 +69,8 @@ const CartItem = ({ item }) => {
 }).then(async (result) => {
     const deleteResult = await deleteCartItem(item._id);
     if(deleteResult.success){
-        Swal.fire({
+      removeItem (item._id)
+     Swal.fire({
     title: "Deleted!",
     text: "Your cart has been deleted.",
     icon: "success"
@@ -77,19 +111,19 @@ const CartItem = ({ item }) => {
       <div className="flex flex-col md:flex-row items-center gap-6">
         <div className="flex items-center border rounded-lg bg-gray-50 overflow-hidden">
           <button
-            onClick={() => handleUpdateQuantity(false)}
+            onClick={() => handleRemoveQuantity(item._id)}
             disabled={loading || item.quantity <= 1}
             className="p-2 hover:bg-gray-200 disabled:opacity-30 transition-colors"
           >
             <FaMinus size={12} />
           </button>
           
-          <span className="px-4 font-bold text-gray-700 min-w-[40px] text-center">
+          <span className="px-4 font-bold text-gray-700 min-width-[40px] text-center">
             {item.quantity}
           </span>
 
           <button
-            onClick={() => handleUpdateQuantity(true)}
+            onClick={() => handleIncrementQuantity(item._id)}
             disabled={loading}
             className="p-2 hover:bg-gray-200 disabled:opacity-30 transition-colors"
           >
@@ -108,6 +142,7 @@ const CartItem = ({ item }) => {
         onClick={handleRemoveCart}
           className="btn btn-ghost btn-circle text-red-500 hover:bg-red-50 hover:text-red-600"
           title="Remove Item"
+          disabled={loading}
         >
           <FaTrashCan size={18} />
         </button>
