@@ -57,36 +57,39 @@ const CartItem = ({ item , removeItem , incrementQuantity , decrementQuantity })
 
 
   //Remove cart item
-  const handleRemoveCart = async()=>{
-   Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, Remove it !"
-}).then(async (result) => {
-    const deleteResult = await deleteCartItem(item._id);
-    if(deleteResult.success){
-      removeItem (item._id)
-     Swal.fire({
-    title: "Deleted!",
-    text: "Your cart has been deleted.",
-    icon: "success"
-  });
-    }
-    else{
-        Swal.fire({
-    title: "Error!",
-    text: "Failed to delete cart item. Please try again.",
-    icon: "error"
-  });
+  const handleRemoveCart = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Remove it!"
+    }).then(async (result) => {
+      // এই কন্ডিশনটি যুক্ত করা হয়েছে
+      if (result.isConfirmed) {
+        setLoading(true); // লোডিং শুরু
+        const deleteResult = await deleteCartItem(item._id);
         
-    }
-});
-
-  }
+        if (deleteResult.success) {
+          removeItem(item._id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your cart item has been deleted.",
+            icon: "success"
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to delete cart item. Please try again.",
+            icon: "error"
+          });
+        }
+        setLoading(false); // লোডিং শেষ
+      }
+    });
+  };
 
 
   return (

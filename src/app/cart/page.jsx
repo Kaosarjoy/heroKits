@@ -7,7 +7,7 @@ import { FaShoppingBasket } from 'react-icons/fa';
 const CartPage = async () => {
     const cartItems = await getCartItems();
     const formattedCartItems = cartItems.map(item=>({...item, _id: item._id.toString()}))
-    console.log(formattedCartItems)
+   // console.log(formattedCartItems)
 
     return (
         <div className="container mx-auto px-4 py-8">

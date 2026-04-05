@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from 'react';
 import CartItem from '../card/CartItem';
 import { decrementItems, incrementItems } from '@/action/server/cart';
+import Link from 'next/link';
 
 const CartSection = ({ cartItems: initialItems = [] }) => {
     const [cartItems, setCartItems] = useState(initialItems);
@@ -66,8 +67,7 @@ const CartSection = ({ cartItems: initialItems = [] }) => {
             </div>
 
             {/* Styled Summary Box */}
-            <div className='bg-white p-6 rounded-2xl shadow-md border border-gray-100 h-fit sticky top-24'>
-  
+<div className='bg-white p-6 rounded-2xl shadow-md border border-gray-100 h-fit sticky top-24'>
   <h3 className="text-xl font-bold text-gray-800 mb-5 border-b pb-3">
     Order Summary
   </h3>
@@ -85,27 +85,37 @@ const CartSection = ({ cartItems: initialItems = [] }) => {
     <div className="flex justify-between text-gray-600">
       <span>Subtotal</span>
       <span className="font-semibold text-gray-800">
-        ৳{totalPrice.toFixed(2)}
+        ৳{totalPrice.toLocaleString()}
       </span>
-    </div>
 
-  
+    </div>
+    
 
     <div className="border-t pt-4 flex justify-between items-center">
-      <span className="text-lg font-bold text-gray-800">
-        Total
-      </span>
+      <span className="text-lg font-bold text-gray-800">Total</span>
       <span className="text-xl font-bold text-primary">
-        ৳{totalPrice.toFixed(2)}
+        ৳{totalPrice.toLocaleString()}
       </span>
     </div>
 
   </div>
 
-  {/* Confirm Button */}
-  <button className="w-full mt-6 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-md">
-    Confirm Order
-  </button>
+  {/* Confirm Button Logic */}
+  {totalItems > 0 ? (
+    <Link 
+      href="/checkOut" 
+      className="block text-center w-full mt-6 bg-primary hover:bg-primary/90 text-white font-semibold py-3 rounded-xl transition-all duration-200 shadow-md"
+    >
+      Confirm Order
+    </Link>
+  ) : (
+    <button 
+      disabled
+      className="w-full mt-6 bg-gray-200 text-gray-500 font-semibold py-3 rounded-xl cursor-not-allowed"
+    >
+      Cart is Empty
+    </button>
+  )}
 
   <p className="text-center text-xs text-gray-400 mt-3">
     Shipping & taxes calculated at checkout
