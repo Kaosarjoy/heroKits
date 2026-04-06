@@ -16,7 +16,7 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-// ✅ Production Metadata
+//  Production Metadata
 export const metadata = {
   metadataBase: new URL("https://hero-kids-orpin.vercel.app"),
 
@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        {/* NextAuthProvider কে বডির ভেতরে নিয়ে আসুন */}
+        {/* NextAuthProvider  */}
         <NextAuthProvider>
           
           {/* Navbar */}
@@ -122,3 +122,6 @@ export default function RootLayout({ children }) {
 
 //NEXTAUTH_SECRET generate korte hole terminal e nicher command run korte hobe
 //node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
+
+//yxia bsvo ikue nzzr gmail key 

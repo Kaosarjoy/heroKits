@@ -28,5 +28,5 @@ clientPromise = global._mongoClientPromise;
 
 export const dbConnect = async (cname) => {
   const client = await clientPromise;
-  return client.db(dbname).collection(cname); // ✅ fixed
+  return client.db(dbname).collection(cname); 
 };

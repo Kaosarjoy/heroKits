@@ -7,7 +7,7 @@ import AuthButton from '../buttons/AuthButton';
 const Navbar = () => {
    const nav=<>
   <li>
-    <Navlink href="/">Home</Navlink>
+    <Navlink href="/" >Home</Navlink>
   </li>
   <li>
     <Navlink href="/products">Products</Navlink>

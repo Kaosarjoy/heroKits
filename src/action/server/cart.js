@@ -45,7 +45,7 @@ export async function addToCart({product, inc = true}){
     
     
 
-    //console.log(user);
+    
     
 }
 
