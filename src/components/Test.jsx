@@ -6,7 +6,7 @@ const Test = () => {
     const session = useSession();
     return (
         <div>
-            {JSON.stringify(session)}
+            {/* {JSON.stringify(session)} */}
             
         </div>
     );
