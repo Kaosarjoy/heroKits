@@ -34,7 +34,7 @@ Alerts: SweetAlert2.
 
 ১. ক্লোন করুন (Clone the repository)
 Bash
-git clone https://github.com/your-username/hero-kids.git
+git clone (https://github.com/Kaosarjoy/heroKits)
 cd hero-kids
 ২. প্যাকেজ ইনস্টল করুন (Install dependencies)
 Bash
@@ -50,4 +50,7 @@ GOOGLE_CLIENT_SECRET=your_google_secret
 ৪. রান করুন (Run the project)
 Bash
 npm run dev
+
+Live Link : https://hero-kids-orpin.vercel.app/
+
 
