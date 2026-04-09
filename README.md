@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🧸 Hero Kids - Premium Online Toy Shop
+Hero Kids হলো একটি আধুনিক, প্রোডাকশন-লেভেল ই-কমার্স প্ল্যাটফর্ম যা শিশুদের জন্য প্রিমিয়াম মানের খেলনা বিক্রির উদ্দেশ্যে তৈরি করা হয়েছে। এটি Next.js 15 এবং Tailwind CSS এর শক্তি ব্যবহার করে একটি দ্রুত এবং স্মুদ ইউজার এক্সপেরিয়েন্স প্রদান করে।
 
-## Getting Started
+✨ Features
+Premium UI/UX: DaisyUI এবং কাস্টম Tailwind স্টাইলিংয়ের মাধ্যমে একটি কিউট এবং ফ্রেন্ডলি ডিজাইন।
 
-First, run the development server:
+Dynamic Product Catalog: ক্যাটাগরি অনুযায়ী খেলনা খোঁজা এবং ফিল্টার করার সুবিধা।
 
-```bash
+Server Actions: Next.js Server Actions ব্যবহার করে দ্রুত ফর্ম সাবমিশন এবং কন্টাক্ট মেসেজ হ্যান্ডলিং।
+
+Authentication: Google এবং ইমেইল ভিত্তিক সিকিউর অথেন্টিকেশন সিস্টেম।
+
+Role-based Dashboard: ইউজার এবং এডমিনের জন্য আলাদা ড্যাশবোর্ড সুবিধা।
+
+Responsive Design: মোবাইল, ট্যাবলেট এবং ডেস্কটপ সব ডিভাইসের জন্য ১০০% অপ্টিমাইজড।
+
+SEO Optimized: প্রতিটি প্রোডাক্ট পেজের জন্য আলাদা মেটাডেটা অপ্টিমাইজেশন।
+
+🛠️ Tech Stack
+Frontend: Next.js 15 (App Router), React, Tailwind CSS.
+
+UI Components: DaisyUI, React Icons.
+
+Backend: Next.js API Routes & Server Actions.
+
+Database: MongoDB.
+
+State Management: React Hooks (useState, useEffect).
+
+Alerts: SweetAlert2.
+
+🚀 Getting Started
+প্রজেক্টটি আপনার লোকাল মেশিনে রান করতে নিচের ধাপগুলো অনুসরণ করুন:
+
+১. ক্লোন করুন (Clone the repository)
+Bash
+git clone https://github.com/your-username/hero-kids.git
+cd hero-kids
+২. প্যাকেজ ইনস্টল করুন (Install dependencies)
+Bash
+npm install
+৩. এনভায়রনমেন্ট সেটআপ (Setup Environment Variables)
+একটি .env.local ফাইল তৈরি করুন এবং নিচের কীগুলো যোগ করুন:
+
+Code snippet
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+৪. রান করুন (Run the project)
+Bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
